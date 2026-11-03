@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../main.dart';
 import '../store.dart';
 
 class AuthScreen extends StatefulWidget {
@@ -35,30 +36,55 @@ class _AuthScreenState extends State<AuthScreen> {
   Widget build(BuildContext context) {
     final scheme = Theme.of(context).colorScheme;
     return Scaffold(
-      body: Center(
-        child: SingleChildScrollView(
-          padding: const EdgeInsets.all(24),
-          child: ConstrainedBox(
-            constraints: const BoxConstraints(maxWidth: 400),
-            child: Card(
-              elevation: 0,
+      body: Container(
+        decoration: const BoxDecoration(gradient: brandGradient),
+        child: SafeArea(
+          child: Center(
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.all(24),
+              child: ConstrainedBox(
+                constraints: const BoxConstraints(maxWidth: 400),
+                child: Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
+                  Container(
+                    width: 72,
+                    height: 72,
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                      color: Colors.white.withValues(alpha: 0.18),
+                      borderRadius: BorderRadius.circular(22),
+                    ),
+                    child: const Icon(Icons.auto_stories_rounded, color: Colors.white, size: 38),
+                  ),
+                  const SizedBox(height: 16),
+                  Text('StudyTrack',
+                      textAlign: TextAlign.center,
+                      style: Theme.of(context).textTheme.headlineMedium?.copyWith(color: Colors.white, fontWeight: FontWeight.w800)),
+                  const SizedBox(height: 6),
+                  Text('Organize seu semestre em um só lugar.',
+                      textAlign: TextAlign.center, style: TextStyle(color: Colors.white.withValues(alpha: 0.85))),
+                  const SizedBox(height: 28),
+                  _card(context, scheme),
+                ]),
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _card(BuildContext context, ColorScheme scheme) {
+    return Card(
+              elevation: 12,
+              shadowColor: Colors.black26,
               child: Padding(
                 padding: const EdgeInsets.all(24),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    Row(children: [
-                      CircleAvatar(
-                        backgroundColor: scheme.primary,
-                        child: const Text('S', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
-                      ),
-                      const SizedBox(width: 12),
-                      Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                        Text('StudyTrack', style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold)),
-                        const Text('Organize seu semestre em um só lugar.'),
-                      ]),
-                    ]),
-                    const SizedBox(height: 24),
+                    Text(_registering ? 'Criar conta' : 'Entrar na sua conta',
+                        style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w700)),
+                    const SizedBox(height: 20),
                     if (_registering) ...[
                       TextField(controller: _name, decoration: const InputDecoration(labelText: 'Nome')),
                       const SizedBox(height: 12),
@@ -88,7 +114,6 @@ class _AuthScreenState extends State<AuthScreen> {
                     const SizedBox(height: 20),
                     FilledButton(
                       onPressed: _submit,
-                      style: FilledButton.styleFrom(padding: const EdgeInsets.symmetric(vertical: 16)),
                       child: Text(_registering ? 'Criar conta' : 'Entrar'),
                     ),
                     TextButton(
@@ -107,10 +132,6 @@ class _AuthScreenState extends State<AuthScreen> {
                   ],
                 ),
               ),
-            ),
-          ),
-        ),
-      ),
-    );
+            );
   }
 }

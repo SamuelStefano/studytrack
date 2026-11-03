@@ -38,26 +38,33 @@ class SubjectsScreen extends StatelessWidget {
               children: [
                 for (final s in store.subjects)
                   Card(
-                    elevation: 0,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
-                      side: BorderSide(color: s.color, width: 2),
-                    ),
+                    clipBehavior: Clip.antiAlias,
+                    margin: const EdgeInsets.only(bottom: 12),
+                    child: Container(
+                    decoration: BoxDecoration(border: Border(left: BorderSide(color: s.color, width: 6))),
                     child: Padding(
                       padding: const EdgeInsets.all(16),
                       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
                         Row(children: [
-                          Expanded(child: Text(s.name, style: Theme.of(context).textTheme.titleMedium)),
+                          Container(
+                            width: 40,
+                            height: 40,
+                            decoration: BoxDecoration(color: s.color.withValues(alpha: 0.12), borderRadius: BorderRadius.circular(12)),
+                            child: Icon(Icons.menu_book_rounded, color: s.color),
+                          ),
+                          const SizedBox(width: 12),
+                          Expanded(child: Text(s.name, style: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w700))),
                           IconButton(icon: const Icon(Icons.edit_outlined), onPressed: () => _showSubjectForm(context, store, existing: s)),
                           IconButton(icon: const Icon(Icons.delete_outline), onPressed: () => _confirmDelete(context, s)),
                         ]),
-                        Text(s.teacher),
+                        Text(s.teacher, style: const TextStyle(color: Color(0xFF6B7280))),
                         const SizedBox(height: 8),
                         Text('${store.tasks.where((t) => t.subjectId == s.id).length} tarefas · '
                             '${(store.progressOf(s) * 100).round()}% concluído'),
                         const SizedBox(height: 8),
-                        LinearProgressIndicator(value: store.progressOf(s), color: s.color, minHeight: 8, borderRadius: BorderRadius.circular(8)),
+                        LinearProgressIndicator(value: store.progressOf(s), color: s.color, backgroundColor: s.color.withValues(alpha: 0.12), minHeight: 8, borderRadius: BorderRadius.circular(8)),
                       ]),
+                    ),
                     ),
                   ),
               ],

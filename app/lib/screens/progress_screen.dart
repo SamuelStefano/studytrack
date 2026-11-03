@@ -22,22 +22,21 @@ class ProgressScreen extends StatelessWidget {
       padding: const EdgeInsets.fromLTRB(16, 16, 16, 96),
       children: [
         Card(
-          elevation: 0,
-          child: Padding(
+                    child: Padding(
             padding: const EdgeInsets.all(24),
             child: Row(children: [
               SizedBox(
                 width: 110,
                 height: 110,
                 child: Stack(fit: StackFit.expand, children: [
-                  CircularProgressIndicator(value: ratio, strokeWidth: 12, backgroundColor: Colors.grey.shade200),
+                  CircularProgressIndicator(value: ratio, strokeWidth: 12, strokeCap: StrokeCap.round, backgroundColor: const Color(0xFFEEF0F6)),
                   Center(child: Text('${(ratio * 100).round()}%', style: text.headlineSmall?.copyWith(fontWeight: FontWeight.bold))),
                 ]),
               ),
               const SizedBox(width: 24),
               Expanded(
                 child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                  Text('Conclusão do semestre', style: text.titleMedium),
+                  Text('Conclusão do semestre', style: text.titleMedium?.copyWith(fontWeight: FontWeight.w700)),
                   const SizedBox(height: 4),
                   Text('${done.length} de $total tarefas concluídas'),
                 ]),
@@ -46,11 +45,10 @@ class ProgressScreen extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 16),
-        Text('Progresso por matéria', style: text.titleMedium),
+        Text('Progresso por matéria', style: text.titleMedium?.copyWith(fontWeight: FontWeight.w700)),
         const SizedBox(height: 8),
         Card(
-          elevation: 0,
-          child: Padding(
+                    child: Padding(
             padding: const EdgeInsets.all(16),
             child: Column(children: [
               for (final s in store.subjects)
@@ -59,18 +57,17 @@ class ProgressScreen extends StatelessWidget {
                   child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
                     Row(children: [Expanded(child: Text(s.name)), Text('${(store.progressOf(s) * 100).round()}%')]),
                     const SizedBox(height: 4),
-                    LinearProgressIndicator(value: store.progressOf(s), color: s.color, minHeight: 8, borderRadius: BorderRadius.circular(8)),
+                    LinearProgressIndicator(value: store.progressOf(s), color: s.color, backgroundColor: s.color.withValues(alpha: 0.12), minHeight: 8, borderRadius: BorderRadius.circular(8)),
                   ]),
                 ),
             ]),
           ),
         ),
         const SizedBox(height: 16),
-        Text('Matérias que precisam de atenção', style: text.titleMedium),
+        Text('Matérias que precisam de atenção', style: text.titleMedium?.copyWith(fontWeight: FontWeight.w700)),
         const SizedBox(height: 8),
         Card(
-          elevation: 0,
-          child: atRisk.isEmpty
+                    child: atRisk.isEmpty
               ? const ListTile(leading: Icon(Icons.verified, color: Colors.green), title: Text('Nenhuma tarefa atrasada.'))
               : Column(children: [
                   for (final s in atRisk)
@@ -82,10 +79,10 @@ class ProgressScreen extends StatelessWidget {
                 ]),
         ),
         const SizedBox(height: 16),
-        Text('Concluídas recentemente', style: text.titleMedium),
+        Text('Concluídas recentemente', style: text.titleMedium?.copyWith(fontWeight: FontWeight.w700)),
         const SizedBox(height: 8),
         Card(
-          elevation: 0,
+          clipBehavior: Clip.antiAlias,
           child: Column(children: [for (final t in done.take(5)) TaskTile(store: store, task: t)]),
         ),
       ],
