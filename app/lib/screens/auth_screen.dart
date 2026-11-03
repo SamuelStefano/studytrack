@@ -45,7 +45,7 @@ class _AuthScreenState extends State<AuthScreen> {
               child: ConstrainedBox(
                 constraints: const BoxConstraints(maxWidth: 400),
                 child: Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
-                  Container(
+                  Center(child: Container(
                     width: 72,
                     height: 72,
                     alignment: Alignment.center,
@@ -54,7 +54,7 @@ class _AuthScreenState extends State<AuthScreen> {
                       borderRadius: BorderRadius.circular(22),
                     ),
                     child: const Icon(Icons.auto_stories_rounded, color: Colors.white, size: 38),
-                  ),
+                  )),
                   const SizedBox(height: 16),
                   Text('StudyTrack',
                       textAlign: TextAlign.center,
