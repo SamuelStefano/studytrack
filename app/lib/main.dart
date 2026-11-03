@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 import 'screens/auth_screen.dart';
 import 'screens/home_shell.dart';
@@ -35,12 +34,12 @@ class StudyTrackApp extends StatelessWidget {
       title: 'StudyTrack',
       debugShowCheckedModeBanner: false,
       theme: base.copyWith(
-        textTheme: GoogleFonts.interTextTheme(base.textTheme),
+        textTheme: base.textTheme.apply(bodyColor: const Color(0xFF111827), displayColor: const Color(0xFF111827)),
         scaffoldBackgroundColor: const Color(0xFFF4F5FA),
         appBarTheme: AppBarTheme(
           backgroundColor: const Color(0xFFF4F5FA),
           surfaceTintColor: Colors.transparent,
-          titleTextStyle: GoogleFonts.inter(fontSize: 22, fontWeight: FontWeight.w800, color: const Color(0xFF111827)),
+          titleTextStyle: const TextStyle(fontSize: 22, fontWeight: FontWeight.w800, color: const Color(0xFF111827)),
         ),
         cardTheme: CardThemeData(
           color: Colors.white,
