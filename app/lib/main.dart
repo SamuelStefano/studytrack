@@ -39,7 +39,7 @@ class StudyTrackApp extends StatelessWidget {
         appBarTheme: AppBarTheme(
           backgroundColor: const Color(0xFFF4F5FA),
           surfaceTintColor: Colors.transparent,
-          titleTextStyle: const TextStyle(fontSize: 22, fontWeight: FontWeight.w800, color: const Color(0xFF111827)),
+          titleTextStyle: const TextStyle(fontSize: 22, fontWeight: FontWeight.w800, color: Color(0xFF111827)),
         ),
         cardTheme: CardThemeData(
           color: Colors.white,
